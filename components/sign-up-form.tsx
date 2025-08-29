@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -9,12 +10,13 @@ export function SignUpForm() {
 
   const handleGoogleSignUp = async () => {
     setIsLoading(true)
-    // This will be implemented with NextAuth.js
-    // For now, we'll show a placeholder
-    setTimeout(() => {
+    try {
+      await signIn("google", { callbackUrl: "/" })
+    } catch (error) {
+      console.error("Sign up error:", error)
+    } finally {
       setIsLoading(false)
-      alert("Google sign up would be triggered here. Please set up NextAuth.js with Google provider.")
-    }, 1000)
+    }
   }
 
   return (
