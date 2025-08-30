@@ -1,10 +1,13 @@
 "use client"
 
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function SignUpForm() {
+  const { data: session, status } = useSession();
+  console.log(session);
+  console.log(status);
   const handleGoogleSignUp = () => {
     signIn("google", { callbackUrl: "/profile" })
   }

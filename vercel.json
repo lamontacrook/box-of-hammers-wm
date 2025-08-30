@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "app/api/actions/scan/headless/route.js": {
+      "maxDuration": 60,
+      "memory": 1536
+    },
+    "app/api/actions/scan/route.js": {
+      "maxDuration": 20
+    }
+  }
+}

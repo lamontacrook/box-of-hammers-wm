@@ -1,31 +1,21 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
+export const authOptions = {
+  session: { strategy: "jwt" },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  pages: {
-    signIn: "/signup",
-  },
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // Redirect to profile page after successful sign in
-      if (url.startsWith("/") || url.startsWith(baseUrl)) {
-        return `${baseUrl}/profile`
-      }
-      return baseUrl
-    },
     async session({ session, token }) {
-      return session
-    },
-    async jwt({ token, user }) {
-      return token
+      if (session?.user) session.user.id = token.sub;
+      return session;
     },
   },
-})
+};
 
-export { handler as GET, handler as POST }
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

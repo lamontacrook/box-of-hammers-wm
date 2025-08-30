@@ -1,25 +1,12 @@
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
-import Providers from '@/components/Providers'
-import { Suspense } from "react"
-import "./globals.css"
-
-export const metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
-}
+import "./globals.css";
+import Providers from "../components/Providers";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={null}>
-          <Providers>{children}</Providers>
-        </Suspense>
-        <Analytics />
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
-  )
+  );
 }
