@@ -1,7 +1,7 @@
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
-import { SessionProvider } from "next-auth/react"
+import Providers from '@/components/Providers'
 import { Suspense } from "react"
 import "./globals.css"
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <Suspense fallback={null}>
-          <SessionProvider>{children}</SessionProvider>
+          <Providers>{children}</Providers>
         </Suspense>
         <Analytics />
       </body>

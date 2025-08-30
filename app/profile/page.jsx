@@ -11,16 +11,29 @@ export default function ProfilePage() {
 
   if (status === "loading") {
     return (
-      <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
-        <div style="animation: spin 1s linear infinite; border-radius: 50%; height: 2rem; width: 2rem; border-bottom: 2px solid #3b82f6;"></div>
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div
+          style={{
+            animation: 'spin 1s linear infinite',
+            borderRadius: '50%',
+            height: '2rem',
+            width: '2rem',
+            borderBottom: '2px solid #3b82f6',
+          }}
+        />
       </div>
     )
   }
 
   if (!session) {
     return (
-      <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
-        <Card style="width: 100%; max-width: 28rem;">
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Card style={{ width: '100%', maxWidth: '28rem' }}>
           <CardHeader>
             <CardTitle>Not Authenticated</CardTitle>
             <CardDescription>Please sign in to view your profile</CardDescription>
