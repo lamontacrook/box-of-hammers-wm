@@ -1,8 +1,9 @@
+import { SignUpForm } from "@/components/sign-up-form"
+
 export default function HomePage() {
   return (
-    <div>
-      <h1>Sign Up Page</h1>
-      <p>Google authentication will be added here.</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <SignUpForm />
     </div>
   )
 }
