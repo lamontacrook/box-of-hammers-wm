@@ -13,13 +13,11 @@ export async function GET(req) {
   try { target = new URL(input); } catch { return Response.json({ error: "Invalid URL" }, { status: 400 }); }
   if (!/^https?:$/i.test(target.protocol)) return Response.json({ error: "Only http/https allowed" }, { status: 400 });
 
-  const executablePath = await chromium.executablePath();
-
   const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
-    executablePath,
-    headless: chromium.headless, // true on Vercel
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
   });
 
   try {
@@ -35,7 +33,7 @@ export async function GET(req) {
       const toAbs = (u) => { try { return new URL(u, location.href).href; } catch { return null; } };
       const fromSrcset = (ss) => (ss || "").split(",").map(s => s.trim().split(/\s+/)[0]).filter(Boolean);
       const CSS_URL_RE = /url\(\s*['"]?([^'")]+)['"]?\s*\)/gi;
-      const isImg = (u) => /\.(avif|gif|jpe?g|png|svg|webp|bmp|ico)(\?|#|$)/i.test(u);
+      const isImg = (u) => /\.(avif|gif|jpe?g|png|svg|webp|bmp|ico|cur|apng)(\?|#|$)/i.test(u);
 
       const out = new Set();
 
